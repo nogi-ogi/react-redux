@@ -1,9 +1,45 @@
 import React from 'react';
 import Puzzles from './Puzzles';
 import uuid from 'uuid';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
-export default class App extends React.Component {
+import { addWord } from '../actions';
+import { addInput } from '../actions';
+
+class Words extends React.Component {
+    render() {
+      const {words} = this.props;
+      console.log({words});
+      return (
+        <div>
+          <Puzzles 
+            puzzles={words}
+            onPuzzleClick={this.activatePuzzleEdit}
+            onEdit={this.editPuzzle} 
+            onDelete={this.deletePuzzle} 
+          />
+          <button className="add-puzzle" onClick={this.addPuzzle}>Add a word</button>
+          <Link to="/grid"><button className="grow-words"> Go to Grid view </button></Link>
+        </div>
+      );
+    }
+
+    addPuzzle = () => {
+        this.props.dispatch(addInput("derp"));
+      };
+}
+
+let mapStateToProps = store => {
+  return {
+      words: store
+  }
+}
+
+export default connect(mapStateToProps)(Words)
+
+//Words = connect()(Words)
+/*export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -76,4 +112,4 @@ export default class App extends React.Component {
         })
       })
     }
-}
+}*/
