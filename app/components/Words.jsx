@@ -1,11 +1,10 @@
 import React from 'react';
 import Puzzles from './Puzzles';
-import uuid from 'uuid';
+
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import { addWord } from '../actions';
-import { addInput } from '../actions';
 
 class Words extends React.Component {
     render() {
@@ -26,7 +25,7 @@ class Words extends React.Component {
     }
 
     addPuzzle = () => {
-        this.props.dispatch(addInput("derp"));
+        this.props.dispatch(addWord({word: 'derp', x: '', y: ''}));
       };
 }
 
